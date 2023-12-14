@@ -43,24 +43,18 @@ Create a virtual environment, and navigate to the 'app' folder and using the fol
 
 ```bash
 python -m venv venv
+
+# Activate the virtual environment
+# On Windows
+venv\Scripts\activate
+
+# On Unix or MacOS
+source venv/bin/activate
+
 cd app
 ```
 
-### 2. Activate the Virtual Environment
-
-On Windows, activate the virtual environment with:
-
-```bash
-venv\Scripts\activate
-```
-
-On Unix or MacOS, activate the virtual environment with:
-
-```bash
-source venv/bin/activate
-```
-
-### 3. Install Requirements
+### 2. Install Requirements
 
 With the virtual environment activated, install the project dependencies from the 'requirements.txt' file:
 
@@ -78,4 +72,4 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-This will apply migrations and start the development server. You can access the API at `http://localhost:8000/`.
+This will apply migrations and start the development server. You can access the API at `http://localhost:8000/api/`.
