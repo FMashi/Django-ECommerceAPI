@@ -10,25 +10,27 @@ The project adopts a well-organized structure to enhance clarity and maintainabi
 
 ```
 Django-ECommerceAPI/
-        ├── api
-        │   ├── __init__.py
-        │   ├── admin.py
-        │   ├── apps.py
-        │   ├── migrations
-        │   │   └── __init__.py
-        │   ├── models.py
-        │   ├── serializers.py
-        │   ├── tests.py
-        │   ├── urls.py
-        │   └── views.py
-        ├── app
-        │   ├── __init__.py
-        │   ├── asgi.py
-        │   ├── settings.py
-        │   ├── urls.py
-        │   └── wsgi.py
-        ├── manage.py
-        └── requirements.txt
+├── app/
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations/
+│   │   │   └── __init__.py
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── asgi.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── manage.py
+│   └── requirements.txt
+
 ```
 
 ## Setting Up Virtual Environment and Installing Requirements
