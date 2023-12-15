@@ -11,8 +11,8 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def Customers_list(request):
    if request.method == 'GET':
-       articles = Customers.objects.all()
-       serializer = serializers(articles, many=True)
+       custmer = Customers.objects.all()
+       serializer = serializers(custmer, many=True)
        return JsonResponse(serializer.data, safe=False)
 
 
