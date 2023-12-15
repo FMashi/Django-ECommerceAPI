@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
             name='Products',
             fields=[
                 ('ProductID', models.IntegerField(primary_key=True, serialize=False)),
-                ('Name', models.CharField(max_length=100)),
+              cls  ('Name', models.CharField(max_length=100)),
                 ('Price', models.IntegerField()),
             ],
         ),
