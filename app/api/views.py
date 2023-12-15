@@ -1,51 +1,38 @@
-from django.shortcuts import render
+from rest_framework import generics, mixins
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from .models import Customer, Product, Order, Review
+from .serializers import (CustomerSerializer, 
+                          ProductSerializer, 
+                          OrderSerializer, 
+                          ReviewSerializer
+                          )
 
-# Create your views here.
-from django.http import HttpResponse, JsonResponse
-from rest_framework.parsers import JSONParser
-from .models import Customers
-from .serializers import serializers
-from django.views.decorators.csrf import csrf_exempt
+class CustomerListCreateView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class CustomerRetrieveUpdateDestroyView(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
 
 
-@csrf_exempt
-def Customers_list(request):
-   if request.method == 'GET':
-       custmer = Customers.objects.all()
-       serializer = serializers(custmer, many=True)
-       return JsonResponse(serializer.data, safe=False)
-
-
-   elif request.method == 'POST':
-       data = JSONParser().parse(request)
-       serializer = serializers(data=data)
-
-       if serializer.is_valid():
-           serializer.save()
-           return JsonResponse(serializer.data, status=201)
-       return JsonResponse(serializer.errors, status=400)
-
-
-# @csrf_exempt
-# def article_detail(request, pk):
-#    try:
-#        article = Article.objects.get(pk=pk)
-#
-#    except Article.DoesNotExist:
-#        return HttpResponse(status=404)
-#
-#    if request.method == 'GET':
-#        serializer = ArticleSerializer(article)
-#        return JsonResponse(serializer.data)
-#
-#    elif request.method == 'PUT':
-#        data = JSONParser().parse(request)
-#        serializer = ArticleSerializer(article, data=data)
-#        if serializer.is_valid():
-#            serializer.save()
-#            return JsonResponse(serializer.data, status=201)
-#        return JsonResponse(serializer.errors, status=400)
-#
-#    elif request.method == 'DELETE':
-#        article.delete()
-#        return HttpResponse(status=204)

@@ -1,51 +1,49 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import Customers,Products,Orders,Reviews
+from .models import Customer, Product, Order, Review
 
+class CustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = ['id', 'first_name', 'last_name']
 
-class CustomersSerializer(serializers.ModelSerializer):
-   class Meta:
-       model = Customers
-       fields = ['CustomersID', 'FirstName', 'LastName']
+    def validate(self, data):
+        unknown = set(data) - set(self.fields)
+        if unknown:
+            raise ValidationError(f"Unknown field(s): {', '.join(unknown)}")
+        return data
 
-   def validate(self, attrs):
-       unknown = set(self.initial_data) - set(self.fields)
-       if unknown:
-           raise ValidationError("Unknown field(s): {}".format(", ".join(unknown)))
-       return attrs
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'price']
 
+    def validate(self, data):
+        unknown = set(data) - set(self.fields)
+        if unknown:
+            raise ValidationError(f"Unknown field(s): {', '.join(unknown)}")
+        return data
 
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ['id', 'customer', 'product', 'quantity', 'created_at']
+        depth = 1
 
-class ProductsSerializer(serializers.ModelSerializer):
-   class Meta:
-       model = Products
-       fields = ['ProductID', 'Name', 'Price']
+    def validate(self, data):
+        unknown = set(data) - set(self.fields)
+        if unknown:
+            raise ValidationError(f"Unknown field(s): {', '.join(unknown)}")
+        return data
 
-   def validate(self, attrs):
-       unknown = set(self.initial_data) - set(self.fields)
-       if unknown:
-           raise ValidationError("Unknown field(s): {}".format(", ".join(unknown)))
-       return attrs
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ['id', 'customer', 'product', 'rating', 'review']
+        depth = 1
 
-
-class OrdersSerializer(serializers.ModelSerializer):
-   class Meta:
-       model = Orders
-       fields = ['OrdersID', 'Customers_ID', 'Product_ID','Quantity','CreatedAt']
-
-   def validate(self, attrs):
-       unknown = set(self.initial_data) - set(self.fields)
-       if unknown:
-           raise ValidationError("Unknown field(s): {}".format(", ".join(unknown)))
-       return attrs
-
-class ReviewsSerializer(serializers.ModelSerializer):
-   class Meta:
-       model = Reviews
-       fields = ['ReviewID', 'Customers_ID', 'Product_ID','Rating','Review']
-
-   def validate(self, attrs):
-       unknown = set(self.initial_data) - set(self.fields)
-       if unknown:
-           raise ValidationError("Unknown field(s): {}".format(", ".join(unknown)))
-       return attrs
+    def validate(self, data):
+        unknown = set(data) - set(self.fields)
+        if unknown:
+            raise ValidationError(f"Unknown field(s): {', '.join(unknown)}")
+        return data

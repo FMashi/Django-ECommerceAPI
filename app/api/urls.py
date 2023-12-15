@@ -1,6 +1,18 @@
-from django.urls import path,re_path,include
-from  .views import Customers_list
+from django.urls import path
+from .views import (
+    CustomerListCreateView, CustomerRetrieveUpdateDestroyView,
+
+)
 
 urlpatterns = [
-  path('Customers_list/',Customers_list,name='Customers_list'),
+    # Customer URLs
+    path('customers/', CustomerListCreateView.as_view(), name='customer-list-create'),
+    path('customers/<int:pk>/', CustomerRetrieveUpdateDestroyView.as_view(), name='customer-retrieve-update-destroy'),
+    
+    # Product URLs
+    
+    # Order URLs
+
+    # Review URLs
+    
 ]
