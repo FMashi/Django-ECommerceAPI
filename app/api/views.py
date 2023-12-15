@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 @csrf_exempt
-def article_list(request):
+def Customers_list(request):
    if request.method == 'GET':
        articles = Customers.objects.all()
        serializer = serializers(articles, many=True)
