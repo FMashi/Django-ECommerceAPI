@@ -7,7 +7,7 @@ class Customers(models.Model):
    LastName = models.CharField(max_length=100)
 
    def __str__(self):
-       return self.CustomersID
+       return self.FirstName
 
 class Products(models.Model):
     ProductID = models.IntegerField(primary_key=True)
@@ -15,7 +15,7 @@ class Products(models.Model):
     Price = models.IntegerField()
 
     def __str__(self):
-        return self.ProductID
+        return self.Name
 
 
 class Orders(models.Model):
@@ -27,7 +27,7 @@ class Orders(models.Model):
 
 
     def __str__(self):
-       return self.OrdersID
+       return self.Quantity
 
 class Reviews(models.Model):
     ReviewID = models.IntegerField(primary_key=True)
@@ -37,7 +37,7 @@ class Reviews(models.Model):
     Review=models.TextField()
 
     def __str__(self):
-       return self.ReviewID
+       return self.Review
 
 
 
