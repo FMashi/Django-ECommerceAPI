@@ -1,4 +1,9 @@
 from django.db import models
+Grade = [
+    ('excellent', 1),
+    ('average', 0),
+    ('bad', -1)
+]
 
 class Customer(models.Model):
     first_name = models.CharField(max_length=50)
@@ -26,7 +31,7 @@ class Order(models.Model):
 class Review(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    rating = models.PositiveIntegerField()
+    rating = models.CharField(choices=Grade, default='average', max_length=50)
     review = models.TextField()
 
     def __str__(self):
