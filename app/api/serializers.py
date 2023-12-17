@@ -28,7 +28,6 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['id', 'customer', 'product', 'quantity', 'created_at']
-        depth = 1
 
     def validate(self, data):
         unknown = set(data) - set(self.fields)
@@ -40,7 +39,6 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ['id', 'customer', 'product', 'rating', 'review']
-        depth = 1
 
     def validate(self, data):
         unknown = set(data) - set(self.fields)
