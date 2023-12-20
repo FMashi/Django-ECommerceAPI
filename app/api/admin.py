@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer, Product, Order, Review
+from .models import CustomUser, Customer, Product, Order, Review
 
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('id', 'first_name', 'last_name')
@@ -26,3 +26,4 @@ admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Review, ReviewAdmin)
+admin.site.register(CustomUser)
